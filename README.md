@@ -79,6 +79,12 @@ Gperftools can be used for profiling your program to measure performance. On mac
    brew install gperftools
    ```
 
+2. Add linking flads to CMake file, note that this flags should be added at linking stage only
+
+```cmake
+add_link_options(-lprofiler -ltcmalloc -L/usr/local/lib)
+```
+
 2. Run your program with profiling enabled:
 
    ```bash
