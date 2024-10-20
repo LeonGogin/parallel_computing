@@ -1,7 +1,3 @@
-Here's the updated README with the information about using the Clang compiler on macOS:
-
----
-
 # Parallel Matrix Multiplication using Max-Sum Approach
 
 This repository contains a parallel implementation of a matrix multiplication algorithm using the max-sum approach. It includes benchmarking examples from the [Parallel Programming course at Aalto University](https://ppc.cs.aalto.fi/). The goal is to demonstrate how matrix operations can be parallelized to improve performance.
