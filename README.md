@@ -19,7 +19,7 @@ This repository contains a parallel implementation of a matrix multiplication al
 For testing on macOS, I used the following Clang compiler version:
 
 ```bash
-Apple clang version 14.0.3 (clang-1403.0.22.14.1) Target: arm64-apple-darwin22.6.0
+gcc-13.2 Target: x86_64-apple-darwin22
 ```
 
 ## Installation and Setup
@@ -42,33 +42,6 @@ To set up the project locally, follow these steps:
    make
    ```
 
-### macOS Specific Setup: Linking OpenMP
-
-If you are using macOS, additional steps are required to properly link OpenMP. Follow these instructions:
-
-1. Ensure that OpenMP is installed via Homebrew:
-
-   ```bash
-   brew install libomp
-   ```
-
-2. Add the following commands to your CMake file to link OpenMP correctly:
-
-   ```cmake
-   set(LIMBO_PATH "/usr/local/opt/libomp")
-   set(OpenMP_CXX_FLAG "-Xclang -fopenmp=libomp")
-   set(OpenMP_CXX_INCLUDE_DIR "${LIMBO_PATH}/include")
-   set(OpenMP_CXX_LIB_NAMES libomp)
-
-   set(OpenMP_libomp_LIBRARY "${LIMBO_PATH}/lib/libomp.dylib")
-   find_package(OpenMP COMPONENTS CXX REQUIRED)
-   ```
-
-   Useful resources:
-   - [OpenMP linking issue on macOS](https://gist.github.com/scivision/16c2ca1dc250f54d34f1a1a35596f4a0)
-   - [CMake Discourse: OpenMP and Clang on macOS](https://discourse.cmake.org/t/how-to-find-openmp-with-clang-on-macos/8860/9)
-   - [CMake OpenMP on macOS](https://www.scivision.dev/cmake-openmp/)
-
 ### Benchmarking with Gperftools
 
 Gperftools can be used for profiling your program to measure performance. On macOS, follow these steps:
@@ -81,9 +54,9 @@ Gperftools can be used for profiling your program to measure performance. On mac
 
 2. Add linking flads to CMake file, note that this flags should be added at linking stage only
 
-```cmake
-add_link_options(-lprofiler -ltcmalloc -L/usr/local/lib)
-```
+   ```cmake
+   add_link_options(-lprofiler -ltcmalloc -L/usr/local/lib)
+   ```
 
 2. Run your program with profiling enabled:
 
