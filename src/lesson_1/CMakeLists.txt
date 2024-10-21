@@ -5,18 +5,6 @@ project(lesson_1 VERSION 0.1.0 LANGUAGES CXX)
 find_package(Catch2 REQUIRED)
 
 # Fix to include libomp correctly
-# https://gist.github.com/scivision/16c2ca1dc250f54d34f1a1a35596f4a0
-# https://discourse.cmake.org/t/how-to-find-openmp-with-clang-on-macos/8860/9
-# https://www.scivision.dev/cmake-openmp/
-set(LIMBO_PATH "/usr/local/opt/libomp")
-set(OpenMP_CXX_FLAG "-Xclang -fopenmp=libomp")
-set(OpenMP_CXX_INCLUDE_DIR "${LIMBO_PATH}/include")
-set(OpenMP_CXX_LIB_NAMES libomp)
-
-# set(OpenMP_C_FLAG "-Xclang -fopenmp")
-# set(OpenMP_C_INCLUDE_DIR /usr/local/opt/libomp/include)
-# set(OpenMP_C_LIB_NAMES libomp)
-set(OpenMP_libomp_LIBRARY "${LIMBO_PATH}/lib/libomp.dylib")
 find_package(OpenMP COMPONENTS CXX REQUIRED)
 
 # Include Ctest anc Catch to generate test
