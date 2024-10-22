@@ -11,8 +11,8 @@ int main()
     constexpr int n = 500;
     constexpr int n_trial = 1;
 
-    std::vector<double> res;
-    std::vector<std::string> versions;
+    std::vector<save_results::Measurment> res;
+    save_results::Measurment tmp_res{};
 
     std::array<float, n * n> d{
         utils::generateRandomFloats<n * n>(1.5, 5.5)};
@@ -22,8 +22,13 @@ int main()
     {
         execTime += utils::funcTime<utils::ms>(V0::step, r.begin(), d.begin(), n);
     }
-    res.push_back(execTime / n_trial);
-    versions.emplace_back("V0");
+
+    tmp_res.implementation_version = "V0";
+    tmp_res.matrix_dimension = n;
+    tmp_res.parallelism = 1;
+    tmp_res.average_execution_time = execTime / n_trial;
+    res.push_back(tmp_res);
+
     std::cout << "V0" << std::endl;
     std::cout << "Average execution time of function: " << execTime / n_trial << " milliseconds" << std::endl;
 
@@ -32,12 +37,16 @@ int main()
     {
         execTime += utils::funcTime<utils::ms>(V1::step, r.begin(), d.begin(), n);
     }
-    res.push_back(execTime / n_trial);
-    versions.emplace_back("V1");
+
+    tmp_res.implementation_version = "V1";
+    tmp_res.matrix_dimension = n;
+    tmp_res.parallelism = 4;
+    tmp_res.average_execution_time = execTime / n_trial;
+    res.push_back(tmp_res);
     std::cout << "V1" << std::endl;
     std::cout << "Average execution time: " << execTime / n_trial << " milliseconds" << std::endl;
 
-    save_results::write_csv(versions, res);
+    save_results::write_csv(res);
 
     // for (int i = 0; i < n; ++i)
     // {

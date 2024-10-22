@@ -46,8 +46,21 @@ namespace utils
 
 namespace save_results
 {
+
+    struct Measurment
+    {
+        std::string implementation_version;
+        int matrix_dimension;
+        int parallelism;
+        double average_execution_time;
+        std::string csv_header;
+
+        // Measurment(std::string a, int b, int c, double d);
+    };
+
     namespace fs = std::filesystem;
-    void write_csv(std::vector<std::string>, std::vector<double>, fs::path = "/Users/l/Documents/programm/c++/mpi/log/");
+
+    void write_csv(std::vector<Measurment>, fs::path = "/Users/l/Documents/programm/c++/mpi/log/");
 }
 
 #endif
