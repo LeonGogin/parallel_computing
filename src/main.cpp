@@ -3,16 +3,16 @@
 #include <vector>
 #include <string>
 #include "lesson_lib.h"
+#include "utils.h"
 
 int main()
 {
     double execTime{0};
     constexpr int n = 500;
-    constexpr int n_trial = 10;
+    constexpr int n_trial = 1;
 
     std::vector<double> res;
     std::vector<std::string> versions;
-    // constexpr int n_version = versions.size();
 
     std::array<float, n * n> d{
         utils::generateRandomFloats<n * n>(1.5, 5.5)};

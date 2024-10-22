@@ -1,6 +1,4 @@
 #include <iostream>
-#include <fstream>
-#include <filesystem>
 #include <limits>
 #include <omp.h>
 #include <vector>
@@ -40,7 +38,13 @@ namespace V1
     // r will contain the result
     // cost of the edge from node i to node j is stored in d[n*i + j] --> we use flat matrix with row major
     {
-#pragma omp parallel for num_threads(4)
+        // #pragma omp parallel
+        //         {
+        //             int num_threads = omp_get_num_threads();
+        //             std::cout << num_threads << std::endl;
+        //         }
+
+#pragma omp parallel for
         for (int i = 0; i < n; ++i)
         {
             for (int j = 0; j < n; ++j)
@@ -58,33 +62,4 @@ namespace V1
         }
     }
 
-}
-
-namespace save_results
-{
-    namespace fs = std::filesystem;
-
-    void write_csv(std::vector<std::string> versions,
-                   std::vector<double> ex_time,
-                   fs::path path)
-    {
-        path /= "output.csv";
-
-        auto v = versions.begin();
-        auto t = ex_time.begin();
-
-        std::ofstream outputfile;
-        outputfile.open(path.c_str());
-
-        outputfile << "func_version, average_execution_time_ms" << std::endl;
-        while (v < versions.end() && t < ex_time.end())
-        {
-            outputfile << *v << ", " << *t << std::endl;
-            std::cout << *v << ", " << *t << std::endl;
-
-            ++v;
-            ++t;
-        }
-        outputfile.close();
-    }
 }
