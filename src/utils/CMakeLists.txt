@@ -10,6 +10,7 @@ include(Catch)
 
 # Add library target
 add_library(utils STATIC src/utils.cpp)
+target_include_directories(utils PRIVATE "${CMAKE_CURRENT_LIST_DIR}/include")
 
 # Add test target -> test target will be compiled as separate executable and will be used for tests
 # add_executable(test_utils test/test_utils.cpp)

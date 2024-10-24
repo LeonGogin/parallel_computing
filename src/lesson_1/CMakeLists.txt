@@ -5,7 +5,7 @@ project(lesson_1 VERSION 0.1.0 LANGUAGES CXX)
 find_package(Catch2 REQUIRED)
 
 # Fix to include libomp correctly
-set(OpenMP_CXX_FLAG "-Xclang -fopenmp")
+set(OpenMP_CXX_FLAGS "-fopenmp")
 find_package(OpenMP COMPONENTS CXX REQUIRED)
 
 # Include Ctest anc Catch to generate test
