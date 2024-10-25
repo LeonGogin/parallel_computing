@@ -13,30 +13,27 @@
 namespace utils
 {
     // Function to generate an array of random floats
-    template <std::size_t N>
-    std::array<float, N> generateRandomFloats(float min, float max)
+    template <typename T>
+    void generate_random_floats(T *d, int n, float min, float max)
     {
-        std::array<float, N> randomFloats;
-
         // Random number generation setup
         // Seed generator
         std::random_device rd;
         // Mersenne Twister engine
         std::mt19937 gen(rd());
         // Uniform distribution
-        std::uniform_real_distribution<float> dist(min, max);
+        std::uniform_real_distribution<T> dist(min, max);
 
         // Fill the array with random floats
-        for (auto &num : randomFloats)
+        for (int i = 0; i < n; i++)
         {
-            num = dist(gen); // Generate a random float
+            d[i] = dist(gen); // Generate a random float
         }
-
-        return randomFloats;
     }
 
     using TimeVar = std::chrono::high_resolution_clock::time_point;
     using ns = std::chrono::nanoseconds;
+    using mcs = std::chrono::microseconds;
     using ms = std::chrono::milliseconds;
 
     template <typename units, typename F, typename... Args>
