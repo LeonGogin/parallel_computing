@@ -8,9 +8,8 @@
 namespace utils
 {
     namespace fs = std::filesystem;
-    using Measurment::Measurment;
 
-    void write_csv(const std::vector<Measurment> &results)
+    void write_csv(const std::vector<Measurment::Measurment> &results)
     {
         fs::path path = "/Users/l/Documents/programm/c++/mpi/log/";
         path /= "output.csv";
